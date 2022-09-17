@@ -13,3 +13,9 @@ This is the template Spring Boot project to demonstrate various usage of Spring 
 - POST v1/books/: Create a new book
 - GET v1/books/{book_id}: Get a book resource
 - DELETE v1/books/{book_id}: Remove a book
+
+
+# Useful links
+
+- Swagger web interface to see the API: http://localhost:8080/swagger-ui.html
+- OpenAPI specification YAML file: http://localhost:8080/v2/api-docs

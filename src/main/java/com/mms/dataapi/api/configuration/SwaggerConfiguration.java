@@ -1,4 +1,4 @@
-package io.codefountain.api.configuration;
+package com.mms.dataapi.api.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,15 +19,15 @@ public class SwaggerConfiguration {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("io.codefountain.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.mms.dataapi.api"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiEndPointInfo());
     }
 
     public ApiInfo apiEndPointInfo(){
-        return new ApiInfoBuilder().title("Spring Boot Rest API")
-                .description("Book Management API")
-                .contact(new Contact("Somnath Musib", "medium.com/@musibs", "codefountain@gmail.com"))
+        return new ApiInfoBuilder().title("DataAPI Documentation")
+                .description("Chatbot DataAPI Rest API")
+                .contact(new Contact("Jacky Casas", "https://jackycasas.ch", "xxx@gmail.com"))
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .version("0.0.1-SNAPSHOT")

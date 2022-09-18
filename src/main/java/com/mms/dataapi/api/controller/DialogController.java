@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mms.dataapi.api.repository.UtteranceSpecification.hasConsent;
+import static com.mms.dataapi.api.repository.UtteranceSpecification.hasLanguage;
+
 @RestController
 @RequestMapping("/")
 public class DialogController {
@@ -66,17 +69,17 @@ public class DialogController {
             if (!dialogue.get().getConsent()) {
                 // The current consent is false
                 if (consent) {
-                    // New consent is true : we save it
+                    // New consent is true --> we save it
                     dialogue.get().setConsent(consent);
                     dialogRepository.save(dialogue.get());
                     return ResponseEntity.status(HttpStatus.CREATED).body("Consent was given.");
                 } else {
-                    // New consent is false : we remove the data from the DB
+                    // New consent is false --> we remove the data from the DB
                     dialogRepository.delete(dialogue.get());
                     return ResponseEntity.status(HttpStatus.CREATED).body("Consent was rejected, data was cleaned.");
                 }
             }
-            // else: Consent was previously set to true
+            // else: consent was previously set to true
             return new ResponseEntity(HttpStatus.OK);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No dialogue was found for this dialogId.");
@@ -90,24 +93,13 @@ public class DialogController {
             @RequestParam(defaultValue = "10") Integer pageSize
             ){
 
-        // todo: ResponseEntity<List<Dialog>> as return type?
-        // todo: filtering by customerId
-        // todo: filtering by consent=true
-
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("creationDate").descending());
-
-        Page<Utterance> pagedResult;
-        if (language.isPresent()) {
-            pagedResult = utteranceRepository.findByLanguage(language.get(), paging);
-        } else {
-            pagedResult = utteranceRepository.findAll(paging);
-        }
+        Page<Utterance> pagedResult = utteranceRepository.findAll(hasConsent(customerId).and(hasLanguage(language)), paging);
 
         if(pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
             return new ArrayList<Utterance>();
         }
-        // todo: do the correct HTTP responses
     }
 }

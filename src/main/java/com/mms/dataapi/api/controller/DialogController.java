@@ -37,7 +37,6 @@ public class DialogController {
             @PathVariable(value="customerId") Long customerId,
             @PathVariable(value="dialogId") Long dialogId,
             @RequestBody DataPayload newEntry) {
-        //curl -X POST localhost:8080/data/2/23 -H 'Content-type:application/json' -d '{"text":"Hey hey", "language":"EN"}'
 
         Optional<Dialog> dialogue = dialogRepository.findById(dialogId);
         if (dialogue.isPresent()) {

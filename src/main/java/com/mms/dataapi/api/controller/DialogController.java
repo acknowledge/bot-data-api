@@ -96,7 +96,7 @@ public class DialogController {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by("creationDate").descending());
         Page<Utterance> pagedResult = utteranceRepository.findAll(hasConsent(customerId).and(hasLanguage(language)), paging);
 
-        if(pagedResult.hasContent()) {
+        if(pagedResult != null && pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
             return new ArrayList<Utterance>();

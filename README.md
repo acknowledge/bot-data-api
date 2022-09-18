@@ -23,10 +23,8 @@ API made with Spring Boot to save and retrieve data from chatbot conversations.
     - JDBC URL: jdbc:h2:mem:testdb
     - Password: password
 
-
 # Improvements to do
 
 - Enum for language
-- Tests
-- Get data/ --> finish the filters
-- 
+- Create a service to export the logic currently sitting in the controller
+- Better tests

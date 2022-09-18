@@ -5,11 +5,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 public class Utterance {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long utteranceId;
+    @Id @GeneratedValue
+    private UUID utteranceId;
     @Setter @Getter
     private String text;
     @Setter @Getter
@@ -24,7 +25,6 @@ public class Utterance {
     public Utterance() {}
 
     public Utterance(Dialog dialog, String text, String language) {
-        //this.dialogId = dialogId;
         this.text = text;
         this.language = language;
         this.creationDate = LocalDateTime.now();
